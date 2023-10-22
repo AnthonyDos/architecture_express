@@ -1,8 +1,7 @@
+const Dico = require('../dico/Dico');
 const PKM = require('../models/pkm');
 
 exports.create = (req, res) => {
-
-    console.log(req.body);
     const postPkm = req.body;
 
     const pkm = new PKM({
@@ -10,10 +9,8 @@ exports.create = (req, res) => {
         type: postPkm.type,
         level: postPkm.level
     });
-    console.log(postPkm);
     pkm.save()
         .then(data => {
-            console.log(data)
             res.send(data);
         }).catch(err => {
             res.status(500).send({
@@ -35,13 +32,12 @@ exports.findAll = (req, res) => {
 
 exports.findById = (req, res) => {
     const pkm_id = req.params._id;
-    console.log(pkm_id);
     
     PKM.findById(pkm_id)
         .then(pkm => {
             if (!pkm) {
                 return res.status(404).send({
-                    message: "Aucun Pokémon trouvé avec cet ID."
+                    message: Dico.NOT_FOUND_POKEMON
                 });
             }
             res.send(pkm);
@@ -54,7 +50,6 @@ exports.findById = (req, res) => {
 
 exports.updateById = (req, res) => {
     const pkm_id = req.params._id;
-    console.log(pkm_id);
     
     PKM.findByIdAndUpdate(pkm_id, req.body,{new: true})
         .then(pkm => {
@@ -68,7 +63,6 @@ exports.updateById = (req, res) => {
 
 exports.deleteById = (req, res) => {
     const pkm_id = req.params._id;
-    console.log(pkm_id);
     
     PKM.findByIdAndRemove(pkm_id)
         .then(pkm => {

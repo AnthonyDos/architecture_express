@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const pkmRouter = require('./router/pkmRouter');
 const userRouter = require('./router/userRouter');
+require('dotenv').config();
 
 
 const app = express();
@@ -13,15 +14,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/pkm', pkmRouter)
-
-
-
-mongoose.connect('mongodb+srv://anthony:mongodb@cluster0.104tymt.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_DB_URI, {
     useNewUrlParser: true
 })
     .then(() => {
-        console.log('MongoDB Connected');
         app.listen(port, () => {
             console.log(`Server started on port ${port}`);
         });
