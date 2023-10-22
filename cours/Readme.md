@@ -1,9 +1,9 @@
 # Application pokémons
 
-[Installation Express JS from scratch](#express)
-[Installation des dépendances](#installation)
+[Installation Express JS](#express)
+[Installation des dépendances](#installation-des-dépendances)
 [Lancement du projet](#projet)
-[Description des dépendances](#dependances)
+[Description des dépendances](#dépendances)
 [Description de l'architecture projet](#architecture)
 [Pourquoi](#pourquoi)
 
